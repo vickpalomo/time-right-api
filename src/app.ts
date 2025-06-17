@@ -1,10 +1,32 @@
 import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import 'reflect-metadata';
+import swaggerUi from 'swagger-ui-express';
+import { specs } from './config/swagger';
 import { AppDataSource } from './config/database';
+import { prefix } from './config/constants';
+import userRoutes from './user/user.routes';
+
+dotenv.config();
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
-// Inicia la base de datos
+app.use(`/${prefix}/docs`, swaggerUi.serve, swaggerUi.setup(specs));
+
+// Routes
+app.use(`/${prefix}/users`, userRoutes);
+
+// Global error handling
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal server error!' });
+});
+
+// Initialized database
 AppDataSource.initialize()
   .then(() => {
     console.log('Database connected');
