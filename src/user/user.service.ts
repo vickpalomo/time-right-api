@@ -5,15 +5,8 @@ import { userRepository } from './user.repository';
 
 dotenv.config();
 
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN ?? 3600;
-
 export class UserService {
-  private readonly jwtSecret: string;
   private readonly userRepository = userRepository;
-
-  constructor() {
-    this.jwtSecret = process.env.JWT_SECRET ?? 'default_secret';
-  }
 
   async createUser(username: string, password: string): Promise<User> {
 

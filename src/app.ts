@@ -7,6 +7,7 @@ import { specs } from './config/swagger';
 import { AppDataSource } from './config/database';
 import { prefix } from './config/constants';
 import userRoutes from './user/user.routes';
+import authRoutes from './auth/auth.routes';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(`/${prefix}/docs`, swaggerUi.serve, swaggerUi.setup(specs));
 
 // Routes
 app.use(`/${prefix}/users`, userRoutes);
+app.use(`/${prefix}/auth`, authRoutes);
 
 // Global error handling
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
