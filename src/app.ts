@@ -9,6 +9,7 @@ import { prefix } from './config/constants';
 import userRoutes from './user/user.routes';
 import authRoutes from './auth/auth.routes';
 import gameRoutes from './game/game.routes'
+import leaderboardRoutes from './leaderboard/leaderboard.routes';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(`/${prefix}/docs`, swaggerUi.serve, swaggerUi.setup(specs));
 app.use(`/${prefix}/users`, userRoutes);
 app.use(`/${prefix}/auth`, authRoutes);
 app.use(`/${prefix}/games`, gameRoutes);
+app.use(`/${prefix}/leaderboard`, leaderboardRoutes);
 
 // Global error handling
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
