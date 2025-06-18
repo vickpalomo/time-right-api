@@ -5,8 +5,6 @@ import { userRepository } from '../user/user.repository';
 
 dotenv.config();
 
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN ?? '1h';
-
 export class AuthService {
   private readonly jwtSecret: string;
   private readonly userRepository = userRepository;
@@ -15,7 +13,7 @@ export class AuthService {
     this.jwtSecret = process.env.JWT_SECRET ?? 'default_secret';
   }
 
-  async login(username: string, password: string): Promise<String> {
+  async login(username: string, password: string): Promise<string> {
     const user = await this.userRepository.findOne({ where: { username }})
     if(!user) {
       throw new Error('User not found')
@@ -26,7 +24,7 @@ export class AuthService {
       throw new Error('Invalid credentials')
     }
 
-    const token = jwt.sign({ userId: user.id }, this.jwtSecret, { expiresIn: JWT_EXPIRES_IN });
+    const token = jwt.sign({ userId: user.id }, this.jwtSecret, { expiresIn: '1h' });
 
     return token;
   }
