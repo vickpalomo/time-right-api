@@ -12,17 +12,6 @@ export class User {
   @Column()
   password!: string;
 
-  @Column({ default: 0 })
-  totalGames!: number;
-
-  @Column({ type: 'float', default: 0 })
-  @Index()
-  averageDeviation!: number;
-
-  @Column({ type: 'float', default: 999999 })
-  @Index()
-  bestDeviation!: number;
-
   @CreateDateColumn()
   createdAt!: Date;
 
