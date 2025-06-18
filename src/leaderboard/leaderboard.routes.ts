@@ -8,6 +8,13 @@ const controller = new LeaderboardController();
 
 /**
  * @swagger
+ * tags:
+ *   name: Leaderboard
+ *   description: Leaderboard
+ */
+
+/**
+ * @swagger
  * /api/v1/leaderboard:
  *   get:
  *     summary: Devuelve el top 10 de jugadores con mejor precisión
