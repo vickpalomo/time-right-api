@@ -4,6 +4,7 @@ import { AuthController } from './auth.controller';
 const router = Router();
 const authController = new AuthController();
 
+// Documentacion generada con agente de IA
 /**
  * @swagger
  * tags:

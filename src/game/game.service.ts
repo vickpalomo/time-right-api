@@ -77,6 +77,7 @@ export class GameService {
 
     const now = Date.now();
 
+    // validamos si la sesion ya esta expirada, en caso de estarlo, solo se actualiza a true el campo expired pero sin actualizar stats
     if (session.expiresAt && now > Number(session.expiresAt)) {
       session.expired = true;
       await this.gameRepository.save(session);
@@ -92,6 +93,7 @@ export class GameService {
     return session;
   }
 
+  // actualizar los stats
   private async updateUserStats(user: { id: string }, newDeviation: number): Promise<void> {
 
     let stats = await this.userStatsRepository.findOne({

@@ -4,6 +4,8 @@ import { LeaderboardController } from './leaderboard.controller';
 const router = Router();
 const controller = new LeaderboardController();
 
+// Documentacion generada con agente de IA
+
 /**
  * @swagger
  * /api/v1/leaderboard:

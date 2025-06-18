@@ -4,6 +4,8 @@ import { UserController } from './user.controller';
 const router = Router();
 const userController = new UserController();
 
+// Documentacion generada con agente de IA
+
 /**
  * @swagger
  * tags:
