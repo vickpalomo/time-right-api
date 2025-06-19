@@ -1,3 +1,5 @@
+// generado con la ayuda de agente IA
+
 import { UserService } from '../../src/user/user.service';
 import { userRepository } from '../../src/user/user.repository';
 import bcrypt from 'bcrypt';

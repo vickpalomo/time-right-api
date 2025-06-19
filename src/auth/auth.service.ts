@@ -16,6 +16,7 @@ export class AuthService {
   async login(username: string, password: string): Promise<string> {
     const user = await this.userRepository.findOne({ where: { username }})
     if(!user) {
+      console.log("user not found")
       throw new Error('User not found')
     }
 
@@ -38,7 +39,6 @@ export class AuthService {
       }
       return decoded.userId;
     } catch (error) {
-      console.error('Error validating token:', error);
       throw new Error('Invalid token');
     }
   }

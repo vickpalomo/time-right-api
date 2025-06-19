@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import 'reflect-metadata';
 import swaggerUi from 'swagger-ui-express';
 import { specs } from './config/swagger';
-import { AppDataSource } from './config/database';
+
 import { prefix } from './config/constants';
 import userRoutes from './user/user.routes';
 import authRoutes from './auth/auth.routes';
@@ -31,14 +31,5 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
   console.error(err.stack);
   res.status(500).json({ error: 'Internal server error!' });
 });
-
-// Initialized database
-AppDataSource.initialize()
-  .then(() => {
-    console.log('Database connected');
-  })
-  .catch((err) => {
-    console.error('Error during DB initialization:', err);
-  });
 
 export default app;
