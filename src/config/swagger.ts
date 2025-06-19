@@ -13,6 +13,10 @@ const options = {
         url: 'http://localhost:3000',
         description: 'Ambiente de desarrollo',
       },
+      {
+        url: 'https://time-right-api.onrender.com/',
+        description: 'Ambiente de produccion',
+      }
     ],
     components: {
       securitySchemes: {
