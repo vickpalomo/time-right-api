@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: time-right-api
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: 9a5a35ef1e07b100a6f005df0a683e89f6dc6cca0ec76e7378c8e085742d353c
+    autoDeploy: false
