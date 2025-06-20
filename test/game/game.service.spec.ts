@@ -99,6 +99,16 @@ describe('GameService', () => {
       (userStatsRepository.create as jest.Mock).mockImplementation(data => data);
       (userStatsRepository.save as jest.Mock).mockResolvedValue({});
 
+      (userStatsRepository.find as jest.Mock).mockResolvedValue([
+        {
+          user: { id: 'u1' },
+          totalGames: 1,
+          averageDeviation: 100,
+          bestDeviation: 90,
+          score: 95,
+        }
+      ]);
+
       const result = await service.stopGame('u1', 's1');
 
       expect(result.stopTime).toBeDefined();

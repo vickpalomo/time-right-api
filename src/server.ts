@@ -1,7 +1,10 @@
+import http from 'http';
 import { AppDataSource } from './config/database';
 import app from './app';
+import { setupWebSocket } from './websocket.server';
 
-const PORT = process.env.PORT || 3000;
+const server = http.createServer(app);
+setupWebSocket(server);
 
 // Initialized database
 AppDataSource.initialize()
@@ -12,7 +15,9 @@ AppDataSource.initialize()
     console.error('Error during DB initialization:', err);
   });
 
+  const PORT = process.env.PORT || 3000;
+
   // Inicia el server de la app
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

@@ -3,6 +3,8 @@ import { gameRepository } from "./game.repository";
 import { userStatsRepository } from '../user/user-stats.repository';
 import { GameSession } from './game.entity';
 import { IsNull } from 'typeorm';
+import { broadcastLeaderboardUpdate } from '../websocket.server';
+import { LeaderboardService } from '../leaderboard/leaderboard.service';
 
 export class GameService {
   private readonly TARGET_TIME = 10000;
@@ -11,6 +13,7 @@ export class GameService {
   private readonly userRepository = userRepository;
   private readonly gameRepository = gameRepository;
   private readonly userStatsRepository = userStatsRepository;
+  private readonly leaderBoardService = new LeaderboardService();
 
   async startGame(userId: string): Promise<GameSession> {
     const user = await this.userRepository.findOne({ where: { id: userId } });
@@ -89,6 +92,10 @@ export class GameService {
 
     await this.gameRepository.save(session);
     await this.updateUserStats(user, session.deviation);
+
+    // Emitir actualización del leaderboard en tiempo real
+    const topPlayers = await this.leaderBoardService.getTopPlayers();
+    broadcastLeaderboardUpdate(topPlayers);
 
     return session;
   }
